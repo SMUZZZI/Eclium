@@ -1,0 +1,103 @@
+.mainplayer {
+  position: absolute;
+  bottom: 0;
+  width: 1440px;
+  height: 134px;
+  border-radius: 1px 1px 0 0;
+  background-color: #222;
+}
+.mainplayer .mainplayer-play-line-block {
+  position: absolute;
+  top: 40px;
+  left: 60px;
+  width: 1320px;
+  height: 15px;
+  border-radius: 1px;
+  background-color: #333;
+}
+.mainplayer .mainplayer-play-line-block .mainplayer-play-line-progress-bar {
+  position: absolute;
+  height: 15px;
+  border-radius: 1px;
+  background-color: #EB7745;
+}
+.mainplayer .mainplayer-play-line-block input {
+  width: 100%;
+  position: absolute;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  margin: 0;
+  height: 15px;
+  background-color: transparent;
+}
+.mainplayer .mainplayer-play-line-block input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+          appearance: none;
+}
+.mainplayer .mainplayer-controls {
+  position: absolute;
+  top: 80px;
+  left: 60px;
+  display: flex;
+  justify-content: space-between;
+  width: 110px;
+}
+.mainplayer .mainplayer-controls button {
+  color: #5C5C5C;
+  background-color: transparent;
+}
+.mainplayer .mainplayer-controls button:hover {
+  color: #969696;
+}
+.mainplayer .volume {
+  position: absolute;
+  top: 78px;
+  left: 220px;
+}
+.mainplayer .volume .volume-container {
+  display: none;
+}
+.mainplayer .volume .volume-range-planks {
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 6.5px;
+  left: 32px;
+  width: 150px;
+}
+.mainplayer .volume .volume-range-planks span {
+  display: block;
+  height: 12px;
+  width: 2px;
+  border-radius: 10px;
+  background-color: #ececec;
+}
+.mainplayer .volume .volume-range-planks span:nth-child(2n) {
+  position: relative;
+  top: 1px;
+  height: 8px;
+}
+.mainplayer .volume .volume-btn {
+  color: #5C5C5C;
+  background-color: transparent;
+}
+.mainplayer .volume .volume-btn:hover {
+  color: #969696;
+}
+.mainplayer .volume input {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  position: absolute;
+  top: 8px;
+  left: 30px;
+  height: 4px;
+  width: 150px;
+  border-radius: 10px;
+  accent-color: #ececec;
+  cursor: pointer;
+}
+.mainplayer .volume .volume-open {
+  display: block;
+}/*# sourceMappingURL=mainplayer.css.map */

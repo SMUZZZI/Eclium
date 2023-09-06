@@ -1,0 +1,31 @@
+body {
+    background-color: #333;
+}
+
+.app-container {
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+a,p,h1,h2,h3,h4,button,ul, textarea {
+    margin: 0;
+    padding: 0;
+    color: #fff;
+    
+    font-family: 'Roboto';
+    font-weight: 400;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+button {
+    cursor: pointer;
+    border: none;
+}
+
+audio {
+    display: none;
+}

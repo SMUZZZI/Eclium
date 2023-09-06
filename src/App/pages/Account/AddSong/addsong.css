@@ -1,0 +1,129 @@
+.addsong {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+.addsong article {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
+  height: 500px;
+  border-radius: 10px;
+  background-color: #5C5C5C;
+}
+.addsong article .add-song-btn {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 10px;
+  font-family: "Roboto";
+  font-size: 15px;
+  color: #fff;
+  background-color: #EB7745 !important;
+  transition: background-color 0.1s ease-in-out;
+}
+.addsong article .add-song-btn:hover {
+  background-color: #2FA072 !important;
+}
+.addsong article form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.addsong article .warn-p {
+  margin-bottom: 20px;
+  color: #ff0000;
+  font-size: 14px;
+}
+.addsong article #file-input {
+  display: none;
+}
+.addsong article #file-input-icon {
+  display: none;
+}
+.addsong article label {
+  position: relative;
+  margin-bottom: 20px;
+  padding: 10px;
+  padding-right: 40px;
+  border-radius: 10px;
+  font-family: "Roboto";
+  font-size: 15px;
+  color: #fff;
+  background-color: #EB7745;
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out;
+}
+.addsong article label svg {
+  position: absolute;
+  top: 11px;
+  margin-left: 10px;
+  transition: margin-left 0.1s ease-in-out;
+}
+.addsong article label:hover {
+  background-color: #2FA072;
+}
+.addsong article label:hover svg {
+  margin-left: 13px;
+}
+.addsong article .addsong-loding-done {
+  margin-bottom: 20px;
+  font-size: 12px;
+}
+.addsong article .title-input {
+  width: 400px;
+  height: 25px;
+  margin-bottom: 20px;
+  padding: 5px;
+  border: none;
+  border-radius: 10px;
+}
+.addsong article .title-input::-moz-placeholder {
+  font-family: "Roboto";
+  font-size: 12px;
+  color: #929292;
+}
+.addsong article .title-input::placeholder {
+  font-family: "Roboto";
+  font-size: 12px;
+  color: #929292;
+}
+.addsong .addsong-genres ul {
+  width: 360px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.addsong .addsong-genres ul .addsong-genres-item {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: #929292;
+  transition: background-color 0.1s ease-in-out;
+  cursor: pointer;
+}
+.addsong .addsong-genres ul .addsong-genres-item:hover {
+  background-color: #b3b3b3;
+}
+.addsong .addsong-genres ul .addsong-genres-item-get {
+  background-color: #e6e6e6;
+  color: #333;
+  transition: background-color 0.1s ease-in-out;
+}
+.addsong .addsong-genres ul .addsong-genres-item-get:hover {
+  background-color: #d4d4d4;
+}
+
+.addsong-open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}/*# sourceMappingURL=addsong.css.map */

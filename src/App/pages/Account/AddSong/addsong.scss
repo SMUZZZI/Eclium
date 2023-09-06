@@ -1,0 +1,147 @@
+.addsong {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.500);
+
+    display: none;
+
+    article {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .add-song-btn {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 10px;
+
+            font-family: 'Roboto';
+            font-size: 15px;
+            color: #fff;
+
+            background-color: #EB7745 !important;
+            transition: background-color .1s ease-in-out;
+
+            &:hover {
+                background-color: #2FA072 !important;
+            }
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .warn-p {
+            margin-bottom: 20px;
+            color: #ff0000;
+            font-size: 14px;
+        }
+
+        width: 800px;
+        height: 500px;
+        border-radius: 10px;
+        background-color: #5C5C5C;
+
+        #file-input {
+            display: none;
+        }
+        #file-input-icon {
+            display: none;
+        }
+
+        label {
+            position: relative;
+            margin-bottom: 20px;
+            padding: 10px;
+            padding-right: 40px;
+            border-radius: 10px;
+
+            font-family: 'Roboto';
+            font-size: 15px;
+            color: #fff;
+
+            background-color: #EB7745;
+            cursor: pointer;
+            transition: background-color .1s ease-in-out;
+
+            svg {
+                position: absolute;
+                top: 11px;
+                margin-left: 10px;
+                transition: margin-left .1s ease-in-out;
+            }
+
+            &:hover {
+                background-color: #2FA072;
+            }
+
+            &:hover svg {
+                margin-left: 13px;
+            }
+        }
+
+        .addsong-loding-done {
+            margin-bottom: 20px;
+            font-size: 12px;
+        }
+
+        .title-input {
+            width: 400px;
+            height: 25px;
+            margin-bottom: 20px;
+            padding: 5px;
+            border: none;
+            border-radius: 10px;
+
+            &::placeholder {
+                font-family: 'Roboto';
+                font-size: 12px;
+                color: #929292;
+            }
+        }
+    }
+    .addsong-genres {
+        ul {
+            width: 360px;
+            display: flex;
+            flex-wrap: wrap;
+            .addsong-genres-item {
+                margin-right: 10px;
+                margin-bottom: 10px;
+                padding: 10px;
+                border-radius: 10px;
+                background-color: #929292;
+                transition: background-color .1s ease-in-out;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #b3b3b3;
+                }
+            }
+
+            .addsong-genres-item-get {
+                background-color: #e6e6e6;
+                color: #333;
+                transition: background-color .1s ease-in-out;
+                &:hover {
+                    background-color: #d4d4d4;
+                }
+            }
+        }
+    }
+}
+ 
+.addsong-open {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

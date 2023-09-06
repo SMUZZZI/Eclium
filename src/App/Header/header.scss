@@ -1,0 +1,33 @@
+.header {
+    position: relative;
+    margin: 30px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    nav {
+        display: flex;
+        align-items: center;
+    }
+
+    &::after {
+        content: '';
+
+        position: absolute;
+        width: 1440px;
+        height: 1px;
+        bottom: -30px;
+        right: -20px;
+        background-color: #F4F0EC;
+    }
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+
+    svg {
+        margin-right: 10px;
+    }
+}

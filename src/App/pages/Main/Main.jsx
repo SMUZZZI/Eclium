@@ -1,0 +1,69 @@
+import React, { useEffect, useState } from 'react'
+import './main.css'
+import axios from '../../../actions/requests'
+import SongList from '../../components/SongList/SongList'
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { audioGenre } from '../../../redux/slices/audioControl.slice'
+
+function Main({ songRange, setSongRange, checkWidth }) {
+  const dispatch = useDispatch()
+  const title = 'Latest songs'
+
+  const { data } = useSelector(state => state.songId)
+
+  const [downloadSong, setDownloadSong] = useState('')
+
+  useEffect(() => {
+    if (data != null)
+      setDownloadSong(`http://localhost:5000${data.audio}`)
+  }, [data])
+
+  return (
+    <section className='main'>
+      <SongList title={title} songRange={songRange} setSongRange={setSongRange} checkWidth={checkWidth} />
+
+      <aside>
+        {
+          data != null ?
+            <section className='main-aside'>
+              <div className='main-aside-author'>
+                <section>
+                  <div className='main-aside-img'>
+                    <img src={`http://localhost:5000${data?.icon}`} />
+                  </div>
+                  <div>
+                    <h3>{data.title.slice(0, 32)}{data.title.length >= 32 ? <p>...</p> : null}</h3>
+                    <Link to={`/account/${data.authorLink}`}>{data.author.slice(0, 40)}{data.author.length >= 40 ? <p>...</p> : null}</Link>
+                  </div>
+                </section>
+              </div>
+              <div className='main-aside-download'>
+                <div>
+                  <Link className='download-btn' target="_blank" download={downloadSong}>Download
+                    <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M7 0V11.1648M7 11.1648L11.5 6.5M7 11.1648L2.5 6.5M0 14H14" stroke="white" stroke-width="2" />
+                    </svg>
+                  </Link>
+                </div>
+              </div>
+              <div className='main-aside-genres'>
+                <h3>Genres</h3>
+                <ul>
+                  {
+                    data.genres.map(i => (
+                      <li><Link onClick={() => dispatch(audioGenre(i))}>{i}</Link></li>
+                    ))
+                  }
+                </ul>
+              </div>
+            </section>
+            :
+            null
+        }
+      </aside>
+    </section>
+  )
+}
+
+export default Main

@@ -1,0 +1,115 @@
+.mainplayer {
+    position: absolute;
+    bottom: 0;
+    width: 1440px;
+    height: 134px;
+    border-radius: 1px 1px 0 0;
+    background-color: #222;
+
+    .mainplayer-play-line-block {
+        position: absolute;
+        top: 40px;
+        left: 60px;
+        width: 1320px;
+        height: 15px;
+        border-radius: 1px;
+        background-color: #333;
+
+        .mainplayer-play-line-progress-bar {
+            position: absolute;
+            height: 15px;
+            border-radius: 1px;
+            background-color: #EB7745;
+        }
+
+        input {
+            width: 100%;
+            position: absolute;
+            appearance: none;
+            margin: 0;
+            height: 15px;
+            background-color: transparent;
+
+            &::-webkit-slider-thumb {
+                appearance: none;
+            }
+        }
+    }
+
+    .mainplayer-controls {
+        position: absolute;
+        top: 80px;
+        left: 60px;
+        display: flex;
+        justify-content: space-between;
+        width: 110px;
+
+        button {
+            color: #5C5C5C;
+            background-color: transparent;
+
+            &:hover {
+                color: #969696;
+            }
+        }
+    }
+
+    .volume {
+        position: absolute;
+        top: 78px;
+        left: 220px;
+
+        .volume-container {
+            display: none;
+        }
+
+        .volume-range-planks {
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            top: 6.5px;
+            left: 32px;
+            width: 150px;
+
+            span {
+                display: block;
+                height: 12px;
+                width: 2px;
+                border-radius: 10px;
+                background-color: #ececec;
+
+                &:nth-child(2n) {
+                    position: relative;
+                    top: 1px;
+                    height: 8px;
+                }
+            }
+        }
+
+
+        .volume-btn {
+            color: #5C5C5C;
+            background-color: transparent;
+
+            &:hover {
+                color: #969696;
+            }
+        }
+
+        input {
+            appearance: none;
+            position: absolute;
+            top: 8px;
+            left: 30px;
+            height: 4px;
+            width: 150px;
+            border-radius: 10px;
+            accent-color: #ececec;
+            cursor: pointer;
+        }
+
+        .volume-open {
+            display: block;
+        }
+    }
+}

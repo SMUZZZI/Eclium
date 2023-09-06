@@ -1,0 +1,124 @@
+.modal {
+  display: none;
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.modal .modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 500px;
+  height: 300px;
+  border-radius: 10px;
+  background-color: #5C5C5C;
+}
+.modal .modal-content .login {
+  display: none;
+  position: relative;
+}
+.modal .modal-content .login input {
+  padding: 5px;
+  margin-bottom: 20px;
+  width: 340px;
+  height: 25px;
+  border: none;
+  border-radius: 10px;
+}
+.modal .modal-content .login input::-moz-placeholder {
+  font-family: "Roboto";
+  font-size: 12px;
+  color: #929292;
+}
+.modal .modal-content .login input::placeholder {
+  font-family: "Roboto";
+  font-size: 12px;
+  color: #929292;
+}
+.modal .modal-content .login div {
+  display: flex;
+  justify-content: center;
+}
+.modal .modal-content .login button {
+  padding: 4px 10px;
+  font-size: 15px;
+  border-radius: 6px;
+  background-color: #EB7745;
+}
+.modal .modal-content .register {
+  display: none;
+  position: relative;
+}
+.modal .modal-content .register input {
+  padding: 5px;
+  margin-bottom: 20px;
+  width: 340px;
+  height: 25px;
+  border: none;
+  border-radius: 10px;
+}
+.modal .modal-content .register input::-moz-placeholder {
+  font-family: "Roboto";
+  font-size: 12px;
+  color: #929292;
+}
+.modal .modal-content .register input::placeholder {
+  font-family: "Roboto";
+  font-size: 12px;
+  color: #929292;
+}
+.modal .modal-content .register div {
+  display: flex;
+  justify-content: center;
+}
+.modal .modal-content .register button {
+  padding: 4px 10px;
+  font-size: 15px;
+  border-radius: 6px;
+  background-color: #EB7745;
+}
+.modal .modal-content .register .pass-conf {
+  display: none;
+}
+.modal .modal-content .register .pass-conf-open {
+  display: block;
+}
+.modal .modal-content .login-open {
+  display: flex;
+  flex-direction: column;
+}
+.modal .modal-content .login-open form {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.modal .modal-content .register-open {
+  display: flex;
+  flex-direction: column;
+}
+.modal .modal-content .register-open form {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.modal .modal-content div {
+  display: flex;
+  align-items: center;
+}
+.modal .modal-content div P {
+  font-size: 10px;
+  color: #cfcfcf;
+}
+
+.modal-open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}/*# sourceMappingURL=loginregistermodal.css.map */
