@@ -56,7 +56,7 @@ function App() {
     <div className='app-container'>
       <Header />
       {
-        data != null ? <audio ref={audioRef} onTimeUpdate={onPlay} preload='metadata' controls src={`http://localhost:5000${data.audio}`}></audio> : null
+        data != null ? <audio ref={audioRef} onTimeUpdate={onPlay} preload='metadata' controls src={`http://45.84.226.30:5000${data.audio}`}></audio> : null
       }
       <Routes >
         <Route path='/' element={<Main songRange={songRange} setSongRange={setSongRange} checkWidth={checkWidth} />} />

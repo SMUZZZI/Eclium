@@ -108,7 +108,7 @@ function SongList({ id, title, itsMyAccount, songRange, setSongRange, checkWidth
                 }
             }
         }
-    }, [nextSong])
+    }, [nextSong])  
 
 
     return (

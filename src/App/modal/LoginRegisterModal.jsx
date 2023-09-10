@@ -26,7 +26,7 @@ function LoginRegisterModal({ modalActive, setModalActive }) {
     if (isValue && isCurrentPassword) {
       const data = await dispatch(fetchRegisterAccount(value))
       if (!data.payload) {
-        alert("Не удвлось авторизоваться")
+        alert("Не удалось авторизоваться")
       }
 
       if ("token" in data.payload) {

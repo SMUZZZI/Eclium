@@ -16,7 +16,7 @@ function Main({ songRange, setSongRange, checkWidth }) {
 
   useEffect(() => {
     if (data != null)
-      setDownloadSong(`http://localhost:5000${data.audio}`)
+      setDownloadSong(`http://45.84.226.30:5000${data.audio}`)
   }, [data])
 
   return (
@@ -30,7 +30,7 @@ function Main({ songRange, setSongRange, checkWidth }) {
               <div className='main-aside-author'>
                 <section>
                   <div className='main-aside-img'>
-                    <img src={`http://localhost:5000${data?.icon}`} />
+                    <img src={`http://45.84.226.30:5000${data?.icon}`} />
                   </div>
                   <div>
                     <h3>{data.title.slice(0, 32)}{data.title.length >= 32 ? <p>...</p> : null}</h3>

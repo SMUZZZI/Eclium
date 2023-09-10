@@ -24,7 +24,7 @@ function AccountHeader() {
                     <Link to='/account/my' className='accountheader'>
                         <h3>{data.name.slice(0, 24)}{data.name.length >= 24 ? <p>...</p> : <p />}</h3>
                         <div>
-                            <img src={`http://localhost:5000${data?.icon}`} />
+                            <img src={`http:/45.84.226.30:5000${data?.icon}`} />
                         </div>
                     </Link>
                     :
