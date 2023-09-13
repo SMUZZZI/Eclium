@@ -20,7 +20,7 @@ function Account({ itsMyAccount, modalActive, setModalActive, accountData, setMy
         }
     }, [accountData])
 
-
+console.log({accountData});
     return (
         accountData != null ?
             <section className='account'>

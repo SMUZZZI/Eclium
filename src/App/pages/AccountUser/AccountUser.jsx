@@ -23,7 +23,6 @@ function AccountUser({ songRange, setSongRange, checkWidth }) {
         const data = await dispatch(fetchAccountID(`${id}`))
         setData(data.payload)
     }
-
     useEffect(() => {
         getAccountID()
     }, [id])
@@ -48,7 +47,6 @@ function AccountUser({ songRange, setSongRange, checkWidth }) {
             }
         }
     }, [myAccData])
-
     const getMyData = async () => {
         const data = await dispatch(fetchAccountMe())
         setMyAccData(data.payload)
@@ -74,9 +72,8 @@ function AccountUser({ songRange, setSongRange, checkWidth }) {
             return <Navigate to='/account/my' />
         }
     }
-
     return (
-        accountData && myAccData != null ?
+        accountData != null ?
             <Account itsMyAccount={false} accountData={accountData} myName={myName} myAbout={myAbout} isSub={isSub} unsubscribeAccount={unsubscribeAccount} subscribeAccount={subscribeAccount} songRange={songRange} setSongRange={setSongRange} checkWidth={checkWidth} />
             :
             null
