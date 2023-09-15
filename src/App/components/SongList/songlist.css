@@ -13,14 +13,15 @@
 .songlist ul {
   list-style: none;
 }
+.songlist ul .song-item-container {
+  margin-bottom: 15px;
+}
 .songlist ul li {
   display: flex;
   position: relative;
   width: 860px;
-  height: 40px;
-  margin-bottom: 15px;
   border-radius: 15px;
-  background-color: #5C5C5C;
+  background-color: #3F4049;
 }
 .songlist ul li .delete-song-btn {
   position: absolute;
@@ -99,9 +100,6 @@
 .songlist ul li .play-line::-webkit-slider-thumb {
   -webkit-appearance: none;
           appearance: none;
-}
-.songlist ul .item-open {
-  height: 50px;
 }
 .songlist ul li:last-child {
   margin-bottom: 0;

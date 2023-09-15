@@ -3,7 +3,7 @@ import './songlist.css'
 import axios from '../../../actions/requests'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchSongGenres, fetchSongID } from '../../../redux/slices/song.slice'
+import { fetchSongAccount, fetchSongGenres, fetchSongID, fetchSongReload } from '../../../redux/slices/song.slice'
 import SongItem from './SongItem'
 import { audioCount, audioNext, audioPrew } from '../../../redux/slices/audioControl.slice'
 import { useLocation } from 'react-router-dom'
@@ -13,20 +13,31 @@ function SongList({ id, title, itsMyAccount, songRange, setSongRange, checkWidth
     const _url = useLocation();
     const itsNotAccount = _url.pathname === "/" ? true : false
     const currentSong = useSelector(state => state.songId)
+
     const nextSong = useSelector(state => state.audioNext)
     const prewSong = useSelector(state => state.audioPrew)
     const currentGenre = useSelector(state => state.audioGenre)
+    const reloadSong = useSelector(state => state.songReload)
 
     const count = useSelector(state => state.audioCount)
     const [songData, setSongData] = useState(null)
     const getSongsAccount = async () => {
         try {
-            const { data } = await axios.get(`/api/song/${id}`)
-            setSongData(data)
+            const data = await dispatch(fetchSongAccount(id))
+            setSongData(data.payload)
         } catch (error) {
             console.log(error);
         }
     }
+    useEffect(() => {
+        if(reloadSong)
+        {
+            getSongsAccount()
+            dispatch(fetchSongReload(false))
+        }
+    }, [reloadSong])
+    
+    
     const getAllSongs = async () => {
         try {
             const { data } = await axios.get(`/api/songs`)
@@ -40,9 +51,9 @@ function SongList({ id, title, itsMyAccount, songRange, setSongRange, checkWidth
         const data = await dispatch(fetchSongID(id))
         dispatch(audioCount(data.payload._id))
     }
-    const deleteSong = (id) => {
-        axios.delete(`/api/song/${id}`)
-        window.location.reload(false);
+    const deleteSong = async (id) => {
+        await axios.delete(`/api/song/${id}`)
+        getSongsAccount()
     }
     useEffect(() => {
         itsNotAccount ?
@@ -118,8 +129,8 @@ function SongList({ id, title, itsMyAccount, songRange, setSongRange, checkWidth
                     <ul>
                         <h2 className='title'>{title}</h2>
                         {
-                            songData.map(item => (
-                                <SongItem item={item} count={count} deleteSong={deleteSong} getSongID={getSongID} itsMyAccount={itsMyAccount} songRange={songRange} setSongRange={setSongRange} checkWidth={checkWidth} />
+                            songData.map((item, index) => (
+                                <SongItem item={item} index={index} count={count} deleteSong={deleteSong} getSongID={getSongID} itsMyAccount={itsMyAccount} songRange={songRange} setSongRange={setSongRange} checkWidth={checkWidth} />
                             ))
                         }
                     </ul >

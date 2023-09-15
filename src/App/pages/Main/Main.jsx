@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './main.css'
-import axios from '../../../actions/requests'
+import { motion } from 'framer-motion'
 import SongList from '../../components/SongList/SongList'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
@@ -26,7 +26,11 @@ function Main({ songRange, setSongRange, checkWidth }) {
       <aside>
         {
           data != null ?
-            <section className='main-aside'>
+            <motion.section className='main-aside'
+              initial={{ x: '100vw', opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 0.2, type: "tween" }}
+            >
               <div className='main-aside-author'>
                 <section>
                   <div className='main-aside-img'>
@@ -51,13 +55,17 @@ function Main({ songRange, setSongRange, checkWidth }) {
                 <h3>Genres</h3>
                 <ul>
                   {
-                    data.genres.map(i => (
-                      <li><Link onClick={() => dispatch(audioGenre(i))}>{i}</Link></li>
+                    data.genres.map((item, index) => (
+                      <motion.li
+                        initial={{ opacity: 0, x: 10 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{delay: `.${index + 2}`}}
+                      ><Link onClick={() => dispatch(audioGenre(item))}>{item}</Link></motion.li>
                     ))
                   }
                 </ul>
               </div>
-            </section>
+            </motion.section>
             :
             null
         }

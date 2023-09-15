@@ -215,13 +215,17 @@
   margin-bottom: 20px;
   margin-right: 15px;
   border-radius: 10px;
-  background-color: #fff;
+  background-color: #3F4049;
+  transition: background-color 0.1s ease-in-out;
+}
+.account .account-aside .container .account-subscriptions ul li:hover {
+  background-color: #515464;
 }
 .account .account-aside .container .account-subscriptions ul li a {
   display: flex;
   align-items: center;
   font-size: 10px;
-  color: #333;
+  color: #fff;
 }
 .account .account-aside .container .account-subscriptions ul li a div {
   width: 15px;

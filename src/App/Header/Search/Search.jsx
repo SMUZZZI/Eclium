@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './search.css'
 import axios from '../../../actions/requests'
+import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { fetchSongID } from '../../../redux/slices/song.slice'
@@ -54,7 +55,11 @@ function Search() {
     }, [search])
 
     return (
-        <>
+        <motion.div
+            initial={{ y: -100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: .25, duration: .3, type: "spring" }}
+        >
             <div className='search'>
                 <form>
                     <input type="search" placeholder='Search' value={search} onClick={() => searchHandler()} onChange={e => { setSearch(e.target.value) }} />
@@ -87,7 +92,7 @@ function Search() {
                     }
                 </ul>
             </section>
-        </>
+        </motion.div>
     )
 }
 

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './account.css'
+import { motion } from 'framer-motion'
 import SongList from '../../components/SongList/SongList'
 import { Link } from 'react-router-dom'
 import AddSong from './AddSong/AddSong'
@@ -20,7 +21,6 @@ function Account({ itsMyAccount, modalActive, setModalActive, accountData, setMy
         }
     }, [accountData])
 
-console.log({accountData});
     return (
         accountData != null ?
             <section className='account'>
@@ -129,15 +129,19 @@ console.log({accountData});
                                 subscribtion != null ?
                                     <ul>
                                         {
-                                            subscribtion.map(item => (
-                                                <li key={item._id}>
+                                            subscribtion.map((item, index) => (
+                                                <motion.li key={item._id}
+                                                    initial={{x: -10, opacity: 0}}
+                                                    animate={{x: 0, opacity: 1}}
+                                                    transition={{delay: `0.${index}`}}
+                                                >
                                                     <Link to={`/account/${item._id}`}>
                                                         <div>
                                                             <img src={`http://45.84.226.30:5000${item?.icon}`} />
                                                         </div>
                                                         {item.name.slice(0, 9)}{item.name.length >= 9 ? <p>...</p> : null}
                                                     </Link>
-                                                </li>
+                                                </motion.li>
                                             ))
                                         }
                                         {

@@ -1,10 +1,20 @@
+.main-player-container {
+  position: absolute;
+  left: 0;
+  width: 100vw;
+  height: 134px;
+  background-color: #222;
+}
+
 .mainplayer {
   position: absolute;
+  left: 0;
+  right: 0;
   bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
   width: 1440px;
-  height: 134px;
-  border-radius: 1px 1px 0 0;
-  background-color: #222;
+  height: 100%;
 }
 .mainplayer .mainplayer-play-line-block {
   position: absolute;

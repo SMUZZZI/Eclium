@@ -5,8 +5,9 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .addsong article {
   position: relative;
@@ -120,10 +121,4 @@
 }
 .addsong .addsong-genres ul .addsong-genres-item-get:hover {
   background-color: #d4d4d4;
-}
-
-.addsong-open {
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }/*# sourceMappingURL=addsong.css.map */

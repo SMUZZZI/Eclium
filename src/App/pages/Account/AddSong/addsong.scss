@@ -5,9 +5,9 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.500);
-
-    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     article {
         position: relative;
@@ -138,10 +138,4 @@
             }
         }
     }
-}
- 
-.addsong-open {
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
