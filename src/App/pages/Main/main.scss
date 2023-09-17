@@ -172,10 +172,11 @@
 @media screen and (max-width: 768px) {
     .main {
         flex-direction: column;
-
         aside {
             width: 100%;
-
+            position: absolute;
+            bottom: 100px;
+            background-color: #1e1f299d;
             .main-aside {
                 margin-left: 0;
                 margin: 0 10px;

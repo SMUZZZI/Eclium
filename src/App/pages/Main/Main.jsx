@@ -20,15 +20,30 @@ function Main({ songRange, setSongRange, checkWidth }) {
       setDownloadSong(`http://45.84.226.30:5000${data.audio}`)
   }, [data])
 
-  const asideHeight = useWindowDimensions()
+  const windowWidth = useWindowDimensions()
+  const [asideHeight, setAsideHeight] = useState(0)
+
+  useEffect(() => {
+    if (windowWidth.width > 1200) {
+        setAsideHeight(236)
+    }
+    else if (windowWidth.width <= 1200 && windowWidth.width > 768) {
+        setAsideHeight(180)
+    }
+    else if (windowWidth.width <= 768) {
+        setAsideHeight(windowWidth.height)
+    }
+
+}, [windowWidth.width])
+  
 
   return (
     <section className='main'>
       <SongList title={title} songRange={songRange} setSongRange={setSongRange} checkWidth={checkWidth} />
 
       <aside style={{
-            minHeight: asideHeight.height - 236
-        }}>
+        minHeight: windowWidth.height - asideHeight
+      }}>
         {
           data != null ?
             <motion.section className='main-aside'

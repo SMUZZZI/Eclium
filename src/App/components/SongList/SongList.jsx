@@ -31,14 +31,13 @@ function SongList({ id, title, itsMyAccount, songRange, setSongRange, checkWidth
         }
     }
     useEffect(() => {
-        if(reloadSong)
-        {
+        if (reloadSong) {
             getSongsAccount()
             dispatch(fetchSongReload(false))
         }
     }, [reloadSong])
-    
-    
+
+
     const getAllSongs = async () => {
         try {
             const { data } = await axios.get(`/api/songs`)
@@ -120,13 +119,27 @@ function SongList({ id, title, itsMyAccount, songRange, setSongRange, checkWidth
                 }
             }
         }
-    }, [nextSong])  
+    }, [nextSong])
 
-    const songlistHeight = useWindowDimensions()
+    const windowWidth = useWindowDimensions()
+    const [asideHeight, setAsideHeight] = useState(0)
 
+    useEffect(() => {
+        if (windowWidth.width > 1200) {
+            setAsideHeight(236)
+        }
+        else if (windowWidth.width <= 1200 && windowWidth.width > 768) {
+            setAsideHeight(180)
+        }
+        else if (windowWidth.width <= 768) {
+            setAsideHeight(160)
+        }
+
+    }, [windowWidth.width])
+    
     return (
         <article className='songlist' style={{
-            maxHeight: songlistHeight.height - 236
+            height: windowWidth.height - asideHeight
         }}>
             {
                 songData != null ?
