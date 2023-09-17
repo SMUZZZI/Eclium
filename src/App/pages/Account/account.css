@@ -253,4 +253,65 @@
 .account .account-aside .container .account-subscriptions ul .show-all svg {
   position: relative;
   left: 5px;
+}
+
+@media screen and (max-width: 1200px) {
+  .account .account-aside {
+    width: 300px;
+  }
+  .account .account-aside .container .account-about {
+    width: 280px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .account {
+    display: flex;
+    flex-direction: column;
+  }
+  .account .account-aside {
+    width: calc(100% - 20px);
+  }
+  .account .account-aside .container {
+    margin-left: 10px;
+  }
+  .account .account-aside .container .account-about {
+    width: 100%;
+  }
+  .account .account-aside .container .account-about p {
+    height: 60px;
+    margin-bottom: 0;
+  }
+  .account .account-aside .container .account-aside-header div {
+    margin-bottom: 0;
+  }
+  .account .account-aside .container .account-aside-header .account-img {
+    width: 40px;
+    height: 40px;
+  }
+  .account .account-aside .container .account-aside-header h3 {
+    margin-right: 10px;
+    font-size: 15px;
+  }
+  .account .account-aside .container .account-aside-header button svg {
+    width: 17px;
+    height: 18px;
+  }
+  .account .account-aside .container .account-aside-header::after {
+    background-color: transparent;
+  }
+  .account .account-aside .container .account-settings {
+    width: 100%;
+    height: 60px;
+  }
+  .account .account-aside .container .account-settings textarea {
+    width: 100%;
+    height: 100%;
+    padding: 4px;
+    color: #fff;
+    font-size: 11px;
+    line-height: 15px;
+  }
+  .account .account-aside .container .account-subscriptions {
+    display: none;
+  }
 }/*# sourceMappingURL=account.css.map */

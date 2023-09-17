@@ -43,4 +43,17 @@
   .accountheader {
     margin-left: 20px;
   }
+  .account-login {
+    margin-left: 40px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .accountheader {
+    margin-left: 20px;
+  }
+  .account-login {
+    margin-left: 40px;
+    font-size: 12px;
+    border-radius: 4px;
+  }
 }/*# sourceMappingURL=accountheader.css.map */
