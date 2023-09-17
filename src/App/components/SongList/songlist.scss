@@ -2,9 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-
     width: 1000px;
-    height: 720px;
     overflow-y: scroll;
 
     .title {
@@ -130,6 +128,111 @@
 
         li:last-child {
             margin-bottom: 0;
+        }
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .songlist {
+        width: 800px;
+
+        ul {
+
+            li {
+                width: 700px;
+                .play-line-block{
+                    width: 480px;
+                    .play-line {
+                        width: 480px;
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 1200px) {
+    .songlist {
+        width: 800px;
+
+        ul {
+
+            li {
+                width: 650px;
+                .play-line-block{
+                    width: 450px;
+                    .play-line-progress-bar{
+                        left: 180px;
+                    }
+                    .play-line {
+                        width: 450px;
+                        left: 180px;
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 1024px) {
+    .songlist {
+        width: 600px;
+
+        ul {
+
+            li {
+                width: 500px;
+                .play-line-block{
+                    width: 310px;
+                    .play-line-progress-bar{
+                        height: 8px;
+                    }
+                    .play-line {
+                        width: 310px;
+                        height: 8px;
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 820px) {
+    .songlist {
+        width: 450px;
+        ul {
+            li {
+                width: 450px;
+                .play-line-block{
+                    width: 260px;
+                    .play-line {
+                        width: 260px;
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 768px) {
+    .songlist {
+        width: 100%;
+        .title {
+            margin: 16px 10px;
+            font-size: 12px;
+        }
+        ul {
+            width: 100%;
+            .song-item-container {
+                margin-bottom: 10px;
+            }
+            li {
+                margin:  0 auto;
+                width: calc(100% - 20px);
+                border-radius: 8px;
+                .play-line-block{
+                    display: none;
+                }
+                button {
+                    border-radius: 6px;
+                }
+            }
         }
     }
 }

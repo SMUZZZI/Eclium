@@ -26,4 +26,40 @@
 }
 .header-logo svg {
   margin-right: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+  .header {
+    margin: 20px 20px;
+  }
+  .header::after {
+    content: "";
+    width: 100%;
+    bottom: -20px;
+    right: 0;
+  }
+  .header-logo h2 {
+    margin-top: 5px;
+    font-size: 20px;
+  }
+  .header-logo svg {
+    width: 32px;
+    height: 32px;
+    margin-right: 5px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .header {
+    justify-content: space-around;
+  }
+}
+@media screen and (max-width: 768px) {
+  .header {
+    margin: 10px;
+  }
+}
+@media screen and (max-width: 520px) {
+  .header {
+    justify-content: space-between;
+  }
 }/*# sourceMappingURL=header.css.map */

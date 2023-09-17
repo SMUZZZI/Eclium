@@ -1,8 +1,9 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { audioPlayPause } from '../../../redux/slices/audioControl.slice'
+import useWindowDimensions from '../../../hooks/useWindowDimensions'
 
 function SongItem({ index, item, count, itsMyAccount, deleteSong, songRange, setSongRange, getSongID, checkWidth }) {
     const dispatch = useDispatch()
@@ -19,7 +20,30 @@ function SongItem({ index, item, count, itsMyAccount, deleteSong, songRange, set
     }
     const clickRef = useRef()
 
+    const screenWidth = useWindowDimensions()
+    const [playLineWidth, setPlayLineWidth] = useState(0)
 
+    useEffect(() => {
+        if (screenWidth.width <= 1440 && screenWidth.width > 1200) {
+            setPlayLineWidth(4.8)
+        }
+        else if (screenWidth.width <= 1200 && screenWidth.width > 1024) {
+            setPlayLineWidth(4.5)
+        }
+        else if (screenWidth.width <= 1024 && screenWidth.width > 820) {
+            setPlayLineWidth(3.1)
+        }
+        else if (screenWidth.width <= 820 && screenWidth.width > 768) {
+            setPlayLineWidth(2.6)
+        }
+        else if (screenWidth.width <= 768) {
+            setPlayLineWidth(2.6)
+            // setPlayLineWidth(screenWidth.width / 100)
+        }
+        else {
+            setPlayLineWidth(6.2)
+        }
+    }, [screenWidth])
 
     return (
         item != null ?
@@ -52,7 +76,7 @@ function SongItem({ index, item, count, itsMyAccount, deleteSong, songRange, set
                     </div>
                     <div className={`play-line-block ${count == item._id && 'play-line-block-open'}`} onClick={e => checkWidth(e, clickRef)} ref={clickRef}>
                         <div className='play-line-progress-bar' style={{
-                            width: `${songRange * 6.2}px`
+                            width: `${songRange * playLineWidth}px`
                         }} />
                         <input type="range" step='0.01' value={songRange} onChange={e => setSongRange(e.target.value)} className='play-line' />
                     </div>

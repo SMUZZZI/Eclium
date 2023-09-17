@@ -5,7 +5,6 @@
 }
 .main aside {
   width: 420px;
-  height: 720px;
 }
 .main aside .main-aside {
   margin-left: 20px;
@@ -116,4 +115,81 @@
 }
 .main aside .main-aside-genres ul a:hover {
   background-color: #515464;
+}
+
+@media screen and (max-width: 1440px) {
+  .main {
+    justify-content: space-around;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .main {
+    justify-content: left;
+  }
+  .main aside {
+    width: 300px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .main {
+    justify-content: center;
+  }
+}
+@media screen and (max-width: 768px) {
+  .main {
+    flex-direction: column;
+  }
+  .main aside {
+    width: 100%;
+  }
+  .main aside .main-aside {
+    margin-left: 0;
+    margin: 0 10px;
+  }
+  .main aside .main-aside-author section {
+    display: flex;
+    align-items: center;
+    padding-bottom: 0;
+  }
+  .main aside .main-aside-author section .main-aside-img {
+    width: 50px;
+    height: 50px;
+  }
+  .main aside .main-aside-author section div:last-child {
+    margin-top: 0;
+  }
+  .main aside .main-aside-author section div:last-child h3 {
+    font-size: 15px;
+  }
+  .main aside .main-aside-author section div:last-child a {
+    font-size: 10px;
+  }
+  .main aside .main-aside-author::after {
+    content: "";
+    background-color: transparent;
+  }
+  .main aside .main-aside-download {
+    position: absolute;
+    right: 0;
+    top: 5px;
+  }
+  .main aside .main-aside-download::after {
+    content: "";
+    background-color: transparent;
+  }
+  .main aside .main-aside-download .download-btn {
+    display: inline-block;
+    margin: 0;
+    padding: 7px 10px;
+    padding-right: 20px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+  .main aside .main-aside-download .download-btn svg {
+    position: relative;
+    width: 12px;
+    height: 13px;
+    top: 2px;
+    left: 8px;
+  }
 }/*# sourceMappingURL=main.css.map */

@@ -47,3 +47,9 @@
         background-color: #2FA072;
     }
 }
+
+@media screen and (max-width: 1024px) {
+    .accountheader {
+        margin-left: 20px;
+    }
+}

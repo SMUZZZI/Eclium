@@ -66,4 +66,16 @@
 .headerlinks a:last-child:hover {
   background-color: #ff9162;
   box-shadow: 0px 0px 10px 0px #ff9162;
+}
+
+@media screen and (max-width: 1200px) {
+  .headerlinks a {
+    margin-right: 20px;
+    font-size: 15px;
+  }
+}
+@media screen and (max-width: 860px) {
+  .headerlinks {
+    display: none;
+  }
 }/*# sourceMappingURL=headerlinks.css.map */

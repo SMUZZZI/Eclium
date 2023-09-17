@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import './mainplayer.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { audioNext, audioPlayPause, audioPrew } from '../../redux/slices/audioControl.slice'
+import useWindowDimensions from '../../hooks/useWindowDimensions'
 
 function MainPlayer({ checkWidth, songRange, setSongRange, volumeRange, setVolumeRange }) {
     const dispatch = useDispatch()
@@ -21,16 +22,34 @@ function MainPlayer({ checkWidth, songRange, setSongRange, volumeRange, setVolum
 
 
     const [isVolumeOpen, setIsVolumeOpen] = useState(false)
+    const screenWidth = useWindowDimensions()
+
+    const [playLineWidth, setPlayLineWidth] = useState(0)
+
+    useEffect(() => {
+        if (screenWidth.width <= 1440 && screenWidth.width > 1200) {
+            setPlayLineWidth(10.8)
+        }
+        else if (screenWidth.width <= 1200 && screenWidth.width > 1024) {
+            setPlayLineWidth(9)
+        }
+        else if (screenWidth.width <= 1024) {
+            setPlayLineWidth(screenWidth.width / 100)
+        }
+        else {
+            setPlayLineWidth(13.2)
+        }
+    }, [screenWidth])
 
     return (
         <div className="main-player-container">
             <section className='mainplayer'>
                 {
                     data != null ?
-                        <>
+                        <div className='mainplayer-controls-container'>
                             <div className='mainplayer-play-line-block' onClick={e => checkWidth(e, clickRef)} ref={clickRef}>
                                 <div className='mainplayer-play-line-progress-bar' style={{
-                                    width: `${songRange * 13.2}px`
+                                    width: `${songRange * playLineWidth}px`
                                 }} />
                                 <input type="range" value={songRange} onChange={e => setSongRange(e.target.value)} />
                             </div>
@@ -84,9 +103,9 @@ function MainPlayer({ checkWidth, songRange, setSongRange, volumeRange, setVolum
                                     <input type="range" step='0.01' min='0' max='1' value={volumeRange} onChange={e => setVolumeRange(e.target.value)} />
                                 </div>
                             </div>
-                        </>
+                        </div>
                         :
-                        <>
+                        <div className='mainplayer-controls-container'>
                             <div className='mainplayer-play-line-block'>
                             </div>
                             <div className='mainplayer-controls'>
@@ -120,7 +139,7 @@ function MainPlayer({ checkWidth, songRange, setSongRange, volumeRange, setVolum
                                     </svg>
                                 </button>
                             </div>
-                        </>
+                        </div>
                 }
 
             </section>

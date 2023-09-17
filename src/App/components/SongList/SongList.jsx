@@ -7,6 +7,7 @@ import { fetchSongAccount, fetchSongGenres, fetchSongID, fetchSongReload } from 
 import SongItem from './SongItem'
 import { audioCount, audioNext, audioPrew } from '../../../redux/slices/audioControl.slice'
 import { useLocation } from 'react-router-dom'
+import useWindowDimensions from '../../../hooks/useWindowDimensions'
 
 function SongList({ id, title, itsMyAccount, songRange, setSongRange, checkWidth, }) {
     const dispatch = useDispatch()
@@ -121,9 +122,12 @@ function SongList({ id, title, itsMyAccount, songRange, setSongRange, checkWidth
         }
     }, [nextSong])  
 
+    const songlistHeight = useWindowDimensions()
 
     return (
-        <article className='songlist'>
+        <article className='songlist' style={{
+            maxHeight: songlistHeight.height - 236
+        }}>
             {
                 songData != null ?
                     <ul>

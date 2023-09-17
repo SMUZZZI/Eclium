@@ -4,6 +4,7 @@
   width: 100vw;
   height: 134px;
   background-color: #222;
+  z-index: 100;
 }
 
 .mainplayer {
@@ -13,8 +14,16 @@
   bottom: 0;
   margin-left: auto;
   margin-right: auto;
-  width: 1440px;
+  max-width: 1440px;
   height: 100%;
+  z-index: 101;
+}
+.mainplayer .mainplayer-controls-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
 }
 .mainplayer .mainplayer-play-line-block {
   position: absolute;
@@ -110,4 +119,48 @@
 }
 .mainplayer .volume .volume-open {
   display: block;
+}
+
+@media screen and (max-width: 1440px) {
+  .mainplayer .mainplayer-controls-container {
+    width: 1200px;
+  }
+  .mainplayer .mainplayer-play-line-block {
+    width: 1080px;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .main-player-container {
+    height: 100px;
+  }
+  .mainplayer .mainplayer-controls-container {
+    width: 1000px;
+  }
+  .mainplayer .mainplayer-controls {
+    top: 60px;
+  }
+  .mainplayer .volume {
+    top: 58px;
+  }
+  .mainplayer .mainplayer-play-line-block {
+    width: 900px;
+    height: 12px;
+    top: 30px;
+  }
+  .mainplayer .mainplayer-play-line-block .mainplayer-play-line-progress-bar {
+    height: 12px;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .mainplayer .mainplayer-controls-container {
+    width: 100%;
+  }
+  .mainplayer .mainplayer-controls-container .volume-btn svg {
+    width: 20px;
+    height: 21px;
+  }
+  .mainplayer .mainplayer-play-line-block {
+    width: 100%;
+    left: 0;
+  }
 }/*# sourceMappingURL=mainplayer.css.map */

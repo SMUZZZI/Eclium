@@ -5,6 +5,7 @@ import SongList from '../../components/SongList/SongList'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { audioGenre } from '../../../redux/slices/audioControl.slice'
+import useWindowDimensions from '../../../hooks/useWindowDimensions'
 
 function Main({ songRange, setSongRange, checkWidth }) {
   const dispatch = useDispatch()
@@ -19,11 +20,15 @@ function Main({ songRange, setSongRange, checkWidth }) {
       setDownloadSong(`http://45.84.226.30:5000${data.audio}`)
   }, [data])
 
+  const asideHeight = useWindowDimensions()
+
   return (
     <section className='main'>
       <SongList title={title} songRange={songRange} setSongRange={setSongRange} checkWidth={checkWidth} />
 
-      <aside>
+      <aside style={{
+            minHeight: asideHeight.height - 236
+        }}>
         {
           data != null ?
             <motion.section className='main-aside'
@@ -59,7 +64,7 @@ function Main({ songRange, setSongRange, checkWidth }) {
                       <motion.li
                         initial={{ opacity: 0, x: 10 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{delay: `.${index + 2}`}}
+                        transition={{ delay: `.${index + 2}` }}
                       ><Link onClick={() => dispatch(audioGenre(item))}>{item}</Link></motion.li>
                     ))
                   }

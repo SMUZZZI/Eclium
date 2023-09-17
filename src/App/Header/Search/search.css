@@ -74,4 +74,20 @@
 .search-result-open {
   display: flex;
   flex-direction: column;
+}
+
+@media screen and (max-width: 1024px) {
+  .search {
+    margin-right: 20px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .search {
+    margin-right: 0;
+  }
+}
+@media screen and (max-width: 520px) {
+  .search {
+    display: none;
+  }
 }/*# sourceMappingURL=search.css.map */
