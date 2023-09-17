@@ -236,3 +236,31 @@
         }
     }
 }
+@media screen and (max-width: 400px) {
+    .songlist {
+        .title {
+            font-size: 10px;
+        }
+        ul {
+            li {
+                border-radius: 6px;
+                button {
+                    border-radius: 4px;
+                }
+    
+                .play-text {
+                    h3 {
+                        padding-top: 7px;
+                        margin-bottom: 6px;
+    
+                        font-size: 10px;
+                    }
+    
+                    p {
+                        font-size: 8px;
+                    }
+                }
+            }
+        }
+    }
+}

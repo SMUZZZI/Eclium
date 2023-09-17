@@ -143,7 +143,7 @@
     width: 100%;
     position: absolute;
     bottom: 100px;
-    background-color: rgba(30, 31, 41, 0.6156862745);
+    background-color: rgba(0, 0, 0, 0.2862745098);
   }
   .main aside .main-aside {
     margin-left: 0;
@@ -173,8 +173,8 @@
   }
   .main aside .main-aside-download {
     position: absolute;
-    right: 0;
-    top: 5px;
+    right: 10px;
+    top: 25px;
   }
   .main aside .main-aside-download::after {
     content: "";
@@ -194,5 +194,19 @@
     height: 13px;
     top: 2px;
     left: 8px;
+  }
+}
+@media screen and (max-width: 400px) {
+  .main aside {
+    height: 80px;
+  }
+  .main aside .main-aside-author section div:last-child h3 {
+    font-size: 12px;
+  }
+  .main aside .main-aside-download .download-btn {
+    border-radius: 4px;
+  }
+  .main aside .main-aside-genres {
+    display: none;
   }
 }/*# sourceMappingURL=main.css.map */

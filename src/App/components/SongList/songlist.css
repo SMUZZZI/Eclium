@@ -193,4 +193,23 @@
   .songlist ul li button {
     border-radius: 6px;
   }
+}
+@media screen and (max-width: 400px) {
+  .songlist .title {
+    font-size: 10px;
+  }
+  .songlist ul li {
+    border-radius: 6px;
+  }
+  .songlist ul li button {
+    border-radius: 4px;
+  }
+  .songlist ul li .play-text h3 {
+    padding-top: 7px;
+    margin-bottom: 6px;
+    font-size: 10px;
+  }
+  .songlist ul li .play-text p {
+    font-size: 8px;
+  }
 }/*# sourceMappingURL=songlist.css.map */

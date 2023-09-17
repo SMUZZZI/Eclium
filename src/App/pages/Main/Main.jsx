@@ -25,32 +25,32 @@ function Main({ songRange, setSongRange, checkWidth }) {
 
   useEffect(() => {
     if (windowWidth.width > 1200) {
-        setAsideHeight(236)
+      setAsideHeight(236)
     }
     else if (windowWidth.width <= 1200 && windowWidth.width > 768) {
-        setAsideHeight(180)
+      setAsideHeight(180)
     }
     else if (windowWidth.width <= 768) {
-        setAsideHeight(windowWidth.height)
+      setAsideHeight(windowWidth.height)
     }
 
-}, [windowWidth.width])
-  
+  }, [windowWidth.width])
+
 
   return (
     <section className='main'>
       <SongList title={title} songRange={songRange} setSongRange={setSongRange} checkWidth={checkWidth} />
+      {
+        data != null ?
+          <motion.aside style={{
+            minHeight: windowWidth.height - asideHeight
+          }}
+            initial={{ x: '100vw', opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 0.2, type: "tween" }}
+          >
 
-      <aside style={{
-        minHeight: windowWidth.height - asideHeight
-      }}>
-        {
-          data != null ?
-            <motion.section className='main-aside'
-              initial={{ x: '100vw', opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.2, type: "tween" }}
-            >
+            <section className='main-aside'>
               <div className='main-aside-author'>
                 <section>
                   <div className='main-aside-img'>
@@ -85,11 +85,11 @@ function Main({ songRange, setSongRange, checkWidth }) {
                   }
                 </ul>
               </div>
-            </motion.section>
-            :
-            null
-        }
-      </aside>
+            </section>
+          </motion.aside>
+          :
+          null
+      }
     </section>
   )
 }
