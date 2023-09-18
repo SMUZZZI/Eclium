@@ -36,7 +36,6 @@ function Main({ songRange, setSongRange, checkWidth }) {
 
   }, [windowWidth.width])
 
-
   return (
     <section className='main'>
       <SongList title={title} songRange={songRange} setSongRange={setSongRange} checkWidth={checkWidth} />

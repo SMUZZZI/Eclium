@@ -199,6 +199,7 @@
 @media screen and (max-width: 400px) {
   .main aside {
     height: 80px;
+    bottom: 80px;
   }
   .main aside .main-aside-author section div:last-child h3 {
     font-size: 12px;

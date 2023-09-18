@@ -125,18 +125,30 @@ function SongList({ id, title, itsMyAccount, songRange, setSongRange, checkWidth
     const [asideHeight, setAsideHeight] = useState(0)
 
     useEffect(() => {
+
         if (windowWidth.width > 1200) {
             setAsideHeight(236)
         }
         else if (windowWidth.width <= 1200 && windowWidth.width > 768) {
             setAsideHeight(180)
         }
-        else if (windowWidth.width <= 768) {
-            setAsideHeight(160)
+        else if (windowWidth.width <= 768 && windowWidth.width > 400) {
+            if (itsNotAccount) {
+                setAsideHeight(160)
+            }
+            else
+                setAsideHeight(354)
+        }
+        else if (windowWidth.width <= 400) {
+            if (itsNotAccount) {
+                setAsideHeight(140)
+            }
+            else
+                setAsideHeight(334)
         }
 
     }, [windowWidth.width])
-    
+
     return (
         <article className='songlist' style={{
             height: windowWidth.height - asideHeight

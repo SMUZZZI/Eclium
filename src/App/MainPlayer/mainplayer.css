@@ -155,6 +155,17 @@
   .mainplayer .mainplayer-controls-container {
     width: 100%;
   }
+  .mainplayer .mainplayer-controls-container .volume-range-planks {
+    top: -5px;
+    left: 45px;
+  }
+  .mainplayer .mainplayer-controls-container .volume-container {
+    transform: rotate(-90deg);
+  }
+  .mainplayer .mainplayer-controls-container .volume-container input {
+    top: -3.5px;
+    left: 43px;
+  }
   .mainplayer .mainplayer-controls-container .volume-btn svg {
     width: 20px;
     height: 21px;
@@ -162,5 +173,34 @@
   .mainplayer .mainplayer-play-line-block {
     width: 100%;
     left: 0;
+  }
+}
+@media screen and (max-width: 400px) {
+  .main-player-container {
+    height: 80px;
+  }
+  .mainplayer .mainplayer-controls-container {
+    width: 100%;
+  }
+  .mainplayer .mainplayer-controls-container .volume {
+    top: 34px;
+    right: 50px;
+    left: auto;
+  }
+  .mainplayer .mainplayer-controls-container .volume-btn svg {
+    width: 20px;
+    height: 21px;
+  }
+  .mainplayer .mainplayer-controls {
+    top: 35px;
+  }
+  .mainplayer .mainplayer-play-line-block {
+    width: 100%;
+    top: 10px;
+    left: 0;
+    height: 5px;
+  }
+  .mainplayer .mainplayer-play-line-block .mainplayer-play-line-progress-bar {
+    height: 5px;
   }
 }/*# sourceMappingURL=mainplayer.css.map */

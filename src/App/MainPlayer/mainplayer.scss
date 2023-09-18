@@ -183,7 +183,19 @@
     .mainplayer {
         .mainplayer-controls-container {
             width: 100%;
-            
+            .volume-range-planks {
+                top: -5px;
+                left: 45px;
+    
+            }
+            .volume-container {
+                transform: rotate(-90deg);
+                input {
+                    top: -3.5px;
+                    left: 43px;
+                }
+            }
+
             .volume-btn {
                 svg {
                     width: 20px;
@@ -196,6 +208,47 @@
             width: 100%;
             left: 0;
 
+        }
+
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .main-player-container {
+        height: 80px;
+    }
+
+    .mainplayer {
+        .mainplayer-controls-container {
+            width: 100%;
+
+            .volume {
+                top: 34px;
+                right: 50px;
+                left: auto;
+            }
+
+            .volume-btn {
+                svg {
+                    width: 20px;
+                    height: 21px;
+                }
+            }
+        }
+
+        .mainplayer-controls {
+            top: 35px;
+        }
+
+        .mainplayer-play-line-block {
+            width: 100%;
+            top: 10px;
+            left: 0;
+            height: 5px;
+
+            .mainplayer-play-line-progress-bar {
+                height: 5px;
+            }
         }
 
     }
