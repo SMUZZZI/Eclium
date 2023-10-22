@@ -1,14 +1,30 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { createRef, useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { audioPlayPause } from '../../../redux/slices/audioControl.slice'
 import useWindowDimensions from '../../../hooks/useWindowDimensions'
+import { useAppDispatch, useAppSelector } from '../../../redux/reduxHooks'
+import { ISong } from '../../../redux/slices/song.slice'
 
-function SongItem({ index, item, count, itsMyAccount, deleteSong, songRange, setSongRange, getSongID, checkWidth }) {
-    const dispatch = useDispatch()
-    const isPlaying = useSelector(state => state.audioControl)
+interface IProps {
+    index: number
+    item: ISong
+    count: string
+    itsMyAccount: boolean
+    deleteSong: (v: string) => void
+    songRange: number
+    setSongRange: (v: number) => void
+    getSongID: (v: string) => void
+    checkWidth: (e: React.MouseEvent<HTMLElement>, clickRef: React.RefObject<HTMLDivElement>) => void
+}
 
+function SongItem(props: IProps) {
+
+    const { index, item, count, itsMyAccount, deleteSong, songRange, setSongRange, getSongID, checkWidth } = props
+
+    const dispatch = useAppDispatch()
+    const isPlaying = useAppSelector(state => state.audioControl)
+    
     const onPlayHandler = () => {
         if (count != item._id) {
             getSongID(item._id)
@@ -18,7 +34,7 @@ function SongItem({ index, item, count, itsMyAccount, deleteSong, songRange, set
         else
             dispatch(audioPlayPause(!isPlaying))
     }
-    const clickRef = useRef()
+    const clickRef = createRef<HTMLDivElement>()
 
     const screenWidth = useWindowDimensions()
     const [playLineWidth, setPlayLineWidth] = useState(0)
@@ -38,7 +54,6 @@ function SongItem({ index, item, count, itsMyAccount, deleteSong, songRange, set
         }
         else if (screenWidth.width <= 768) {
             setPlayLineWidth(2.6)
-            // setPlayLineWidth(screenWidth.width / 100)
         }
         else {
             setPlayLineWidth(6.2)
@@ -50,7 +65,7 @@ function SongItem({ index, item, count, itsMyAccount, deleteSong, songRange, set
             <motion.div className='song-item-container'
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: `0.${index}` }}
+                transition={{ delay: Number(`0.${index}`) }}
             >
                 <motion.li key={item._id}
                     animate={count == item._id ? { height: 50 } : { height: 40 }}
@@ -78,7 +93,7 @@ function SongItem({ index, item, count, itsMyAccount, deleteSong, songRange, set
                         <div className='play-line-progress-bar' style={{
                             width: `${songRange * playLineWidth}px`
                         }} />
-                        <input type="range" step='0.01' value={songRange} onChange={e => setSongRange(e.target.value)} className='play-line' />
+                        <input type="range" step='0.01' value={songRange} onChange={e => setSongRange(Number(e.target.value))} className='play-line' />
                     </div>
                     {
                         itsMyAccount ?

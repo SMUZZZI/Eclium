@@ -3,15 +3,15 @@ import './accountheader.css'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import LoginRegisterModal from '../../modal/LoginRegisterModal'
-import { useDispatch, useSelector } from 'react-redux'
 import { fetchAccountMe, selectIsAuth } from '../../../redux/slices/user.slice'
+import { useAppDispatch, useAppSelector } from '../../../redux/reduxHooks'
 
 function AccountHeader() {
 
-    const dispatch = useDispatch()
-    const isAuthorized = useSelector(selectIsAuth)
+    const dispatch = useAppDispatch()
+    const isAuthorized = useAppSelector(selectIsAuth)
 
-    const { data } = useSelector(state => state.auth)
+    const { data } = useAppSelector(state => state.auth)
     useEffect(() => {
         dispatch(fetchAccountMe())
     }, [])
@@ -27,7 +27,7 @@ function AccountHeader() {
             {
                 isAuthorized ?
                     <Link to='/account/my' className='accountheader'>
-                        <h3>{data.name.slice(0, 24)}{data.name.length >= 24 ? <p>...</p> : <p />}</h3>
+                        <h3>{data?.name.slice(0, 24)}{data != null && data.name.length >= 24 ? <p>...</p> : <p />}</h3>
                         <div>
                             <img src={`http://45.84.226.30:5000${data?.icon}`} />
                         </div>

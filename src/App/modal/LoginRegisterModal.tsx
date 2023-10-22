@@ -1,27 +1,34 @@
 import React, { useState } from 'react'
 import './loginregistermodal.css'
 import { motion, AnimatePresence } from 'framer-motion'
-import { fetchLoginAccount, fetchRegisterAccount } from '../../redux/slices/user.slice'
-import { useDispatch } from 'react-redux'
+import { IAuthValue, fetchLoginAccount, fetchRegisterAccount } from '../../redux/slices/user.slice'
+import { useAppDispatch } from '../../redux/reduxHooks'
 
-function LoginRegisterModal({ modalActive, setModalActive }) {
+interface IState {
+  modalActive: boolean
+  setModalActive: (v: boolean) => void
+}
 
-  const dispatch = useDispatch()
+function LoginRegisterModal(props: IState) {
+
+  const { modalActive, setModalActive } = props
+
+  const dispatch = useAppDispatch()
 
   const [login, setLogin] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirm, setPasswordConfirm] = useState('')
 
-  const authValues = {
+  const authValues: IAuthValue = {
     name: login,
     email,
     password
   }
   const [authorized, setAuthorized] = useState(false)
 
-  const registerSubmit = async (value) => {
-    const isValue = login.length >= 3 && email.length > 3 && password >= 6
+  const registerSubmit = async (value: IAuthValue) => {
+    const isValue = login.length >= 3 && email.length > 3 && password.length >= 6
     const isCurrentPassword = password === passwordConfirm
 
     if (isValue && isCurrentPassword) {
@@ -35,7 +42,7 @@ function LoginRegisterModal({ modalActive, setModalActive }) {
       }
     }
   }
-  const loginSubmit = async (value) => {
+  const loginSubmit = async (value: IAuthValue) => {
     const isValue = login.length > 3 && password.length >= 6
 
     if (isValue) {
@@ -63,7 +70,7 @@ function LoginRegisterModal({ modalActive, setModalActive }) {
             <motion.div className='modal-content' onClick={e => { e.stopPropagation() }}
               initial={{ y: '-100vw' }}
               animate={{ y: 0 }}
-              transition={{duration: .4, type: 'spring'}}
+              transition={{ duration: .4, type: 'spring' }}
               exit={{ y: '-100vw' }}
             >
               <article className={`login ${authorized && 'login-open'}`}>

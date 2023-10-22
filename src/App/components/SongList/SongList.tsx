@@ -2,26 +2,37 @@ import React, { useState } from 'react'
 import './songlist.css'
 import axios from '../../../actions/requests'
 import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { fetchSongAccount, fetchSongGenres, fetchSongID, fetchSongReload } from '../../../redux/slices/song.slice'
+import { ISong, fetchSongAccount, fetchSongGenres, fetchSongID, fetchSongReload } from '../../../redux/slices/song.slice'
 import SongItem from './SongItem'
 import { audioCount, audioNext, audioPrew } from '../../../redux/slices/audioControl.slice'
 import { useLocation } from 'react-router-dom'
 import useWindowDimensions from '../../../hooks/useWindowDimensions'
+import { useAppDispatch, useAppSelector } from '../../../redux/reduxHooks'
 
-function SongList({ id, title, itsMyAccount, songRange, setSongRange, checkWidth, }) {
-    const dispatch = useDispatch()
+interface IProps {
+    id: string
+    title: string
+    itsMyAccount: boolean
+    songRange: number
+    setSongRange: (v: number) => void
+    checkWidth: (e: React.MouseEvent<HTMLElement>, clickRef: React.RefObject<HTMLDivElement>) => void
+}
+
+function SongList(props: IProps) {
+    const { id, title, itsMyAccount, songRange, setSongRange, checkWidth, } = props
+
+    const dispatch = useAppDispatch()
     const _url = useLocation();
     const itsNotAccount = _url.pathname === "/" ? true : false
-    const currentSong = useSelector(state => state.songId)
+    const currentSong = useAppSelector(state => state.songId)
 
-    const nextSong = useSelector(state => state.audioNext)
-    const prewSong = useSelector(state => state.audioPrew)
-    const currentGenre = useSelector(state => state.audioGenre)
-    const reloadSong = useSelector(state => state.songReload)
+    const nextSong = useAppSelector(state => state.audioNext)
+    const prewSong = useAppSelector(state => state.audioPrew)
+    const currentGenre = useAppSelector(state => state.audioGenre)
+    const reloadSong = useAppSelector(state => state.songReload)
 
-    const count = useSelector(state => state.audioCount)
-    const [songData, setSongData] = useState(null)
+    const count = useAppSelector(state => state.audioCount)
+    const [songData, setSongData] = useState<ISong[] | null>(null)
     const getSongsAccount = async () => {
         try {
             const data = await dispatch(fetchSongAccount(id))
@@ -47,11 +58,11 @@ function SongList({ id, title, itsMyAccount, songRange, setSongRange, checkWidth
             console.log(error);
         }
     }
-    const getSongID = async (id) => {
+    const getSongID = async (id: string) => {
         const data = await dispatch(fetchSongID(id))
         dispatch(audioCount(data.payload._id))
     }
-    const deleteSong = async (id) => {
+    const deleteSong = async (id: string) => {
         await axios.delete(`/api/song/${id}`)
         getSongsAccount()
     }
@@ -62,7 +73,7 @@ function SongList({ id, title, itsMyAccount, songRange, setSongRange, checkWidth
             getSongsAccount()
     }, [itsNotAccount])
 
-    const getGenreSongs = async (genre) => {
+    const getGenreSongs = async (genre: string) => {
         try {
             const data = await dispatch(fetchSongGenres(genre))
             setSongData(data.payload)

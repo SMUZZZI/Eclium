@@ -3,14 +3,15 @@ import './search.css'
 import axios from '../../../actions/requests'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { fetchSongID } from '../../../redux/slices/song.slice'
+import { ISong, fetchSongID } from '../../../redux/slices/song.slice'
+import { useAppDispatch } from '../../../redux/reduxHooks'
+import { IAccount } from '../../../redux/slices/user.slice'
 
-function searchData(searchWord, data) {
+function searchData(searchWord: string, data: any[]) {
     if (!searchWord) {
         return
     }
-    const result = []
+    const result: ISong[] | IAccount[] = []
     for (let i = 0; i < data.length; i++) {
         let item = data[i]
         if (item?.title) {
@@ -26,19 +27,19 @@ function searchData(searchWord, data) {
 }
 
 function Search() {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const [search, setSearch] = useState('')
-    const [songs, setSongs] = useState(null)
-    const [users, setUsers] = useState(null)
+    const [songs, setSongs] = useState<any | null>(null)
+    const [users, setUsers] = useState<any | null>(null)
 
-    const [searchResult, setSearchResult] = useState(null)
-
+    const [searchResult, setSearchResult] = useState<IAccount[] | ISong[] | null | undefined>(null)
+    
     const searchHandler = async () => {
         if (songs == null || users == null) {
             const songsData = await axios.get('/api/songs')
             const accountsData = await axios.get('/api/accounts')
-
+            
             setSongs(songsData)
             setUsers(accountsData)
         }
@@ -80,8 +81,8 @@ function Search() {
                             searchResult.map(item => (
                                 <li key={item._id}>
                                     {
-                                        item?.title ?
-                                            <Link onClick={() => dispatch(fetchSongID(item._id))}>{item.title}</Link>
+                                        "title" in item ?
+                                            <Link to='/' onClick={() => dispatch(fetchSongID(item._id))}>{item.title}</Link>
                                             :
                                             <Link to={`/account/${item._id}`}>{item.name}</Link>
                                     }

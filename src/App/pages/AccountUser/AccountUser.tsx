@@ -1,22 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import Account from '../Account/Account'
-import { useDispatch } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom';
-import { fetchAccountID, fetchAccountMe } from '../../../redux/slices/user.slice';
+import { IAccount, fetchAccountID, fetchAccountMe } from '../../../redux/slices/user.slice';
 import axios from '../../../actions/requests'
+import { useAppDispatch } from '../../../redux/reduxHooks';
 
+interface IProps {
+    songRange: number
+    setSongRange: (v: number) => void
+    checkWidth: (e: React.MouseEvent<HTMLElement>, clickRef: React.RefObject<HTMLDivElement>) => void
+}
+function AccountUser(props: IProps) {
 
-function AccountUser({ songRange, setSongRange, checkWidth }) {
+    const { songRange, setSongRange, checkWidth } = props
 
-    const dispatch = useDispatch()
-    const [accountData, setData] = useState(null)
+    const dispatch = useAppDispatch()
+    const [accountData, setData] = useState<IAccount | null>(null)
     const { id } = useParams();
 
     const limit = 430
     const [myAbout, setMyAbout] = useState(''.slice(0, limit))
     const [myName, setMyName] = useState(''.slice(0, 16))
 
-    const [myAccData, setMyAccData] = useState(null)
+    const [myAccData, setMyAccData] = useState<IAccount | null>(null)
     const [isSub, setIsSub] = useState(false)
     
     const getAccountID = async () => {
@@ -74,7 +80,19 @@ function AccountUser({ songRange, setSongRange, checkWidth }) {
     }
     return (
         accountData != null ?
-            <Account itsMyAccount={false} accountData={accountData} myName={myName} myAbout={myAbout} isSub={isSub} unsubscribeAccount={unsubscribeAccount} subscribeAccount={subscribeAccount} songRange={songRange} setSongRange={setSongRange} checkWidth={checkWidth} />
+            <Account itsMyAccount={false} accountData={accountData} myName={myName} myAbout={myAbout} isSub={isSub} unsubscribeAccount={unsubscribeAccount} subscribeAccount={subscribeAccount} songRange={songRange} setSongRange={setSongRange} checkWidth={checkWidth} modalActive={false} setModalActive={function (v: boolean): void {
+                throw new Error('Function not implemented.');
+            } } setMyName={function (v: string): void {
+                throw new Error('Function not implemented.');
+            } } editMyAccount={function (): void {
+                throw new Error('Function not implemented.');
+            } } setEditAbout={function (v: boolean): void {
+                throw new Error('Function not implemented.');
+            } } editAbout={false} setMyAbout={function (v: string): void {
+                throw new Error('Function not implemented.');
+            } } onIconChange={function (e: React.FormEvent<HTMLInputElement>): void {
+                throw new Error('Function not implemented.');
+            } } />
             :
             null
     )

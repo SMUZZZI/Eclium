@@ -5,10 +5,34 @@ import SongList from '../../components/SongList/SongList'
 import { Link } from 'react-router-dom'
 import AddSong from './AddSong/AddSong'
 import axios from '../../../actions/requests'
+import { IAccount } from '../../../redux/slices/user.slice'
 
-function Account({ itsMyAccount, modalActive, setModalActive, accountData, setMyName, myName, editMyAccount, setEditAbout, editAbout, setMyAbout, myAbout, onIconChange, isSub, unsubscribeAccount, subscribeAccount, songRange, setSongRange, checkWidth }) {
+interface IProps {
+    itsMyAccount: boolean
+    modalActive: boolean
+    setModalActive: (v: boolean) => void
+    accountData: IAccount
+    setMyName: (v: string) => void
+    myName: string
+    editMyAccount: () => void
+    setEditAbout: (v: boolean) => void
+    editAbout: boolean
+    setMyAbout: (v: string) => void
+    myAbout: string
+    onIconChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    isSub: boolean
+    unsubscribeAccount: () => void
+    subscribeAccount: () => void
+    songRange: number
+    setSongRange: (v: number) => void
+    checkWidth: (e: React.MouseEvent<HTMLElement>, clickRef: React.RefObject<HTMLDivElement>) => void
+}
 
-    const [subscribtion, setSubscribtion] = useState(null)
+function Account(props: IProps) {
+
+    const { itsMyAccount, modalActive, setModalActive, accountData, setMyName, myName, editMyAccount, setEditAbout, editAbout, setMyAbout, myAbout, onIconChange, isSub, unsubscribeAccount, subscribeAccount, songRange, setSongRange, checkWidth } = props
+
+    const [subscribtion, setSubscribtion] = useState<IAccount[] | null>(null)
     const getSubscription = async () => {
         const { data } = await axios.get(`/api/account/${accountData._id}/subs`)
         setSubscribtion(data)
@@ -32,7 +56,7 @@ function Account({ itsMyAccount, modalActive, setModalActive, accountData, setMy
                                     itsMyAccount ?
                                         <>
                                             <input type="file" id='icon-file-input' accept='image/*' onChange={onIconChange} className='account-icon-settings' />
-                                            <label for='icon-file-input' className={`account-settings icon-file-input-label  ${editAbout && 'account-settings-open'}`}>
+                                            <label htmlFor='icon-file-input' className={`account-settings icon-file-input-label  ${editAbout && 'account-settings-open'}`}>
                                                 <svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M12.5 22V2M12.5 2L20.5357 11.6071M12.5 2L4.46429 11.6071M0 25H25" stroke="currentColor" stroke-width="2" />
                                                 </svg>
@@ -53,7 +77,7 @@ function Account({ itsMyAccount, modalActive, setModalActive, accountData, setMy
                                 {
                                     itsMyAccount ?
                                         <form className={`account-settings account-settings-name ${editAbout && 'account-settings-open'}`}>
-                                            <input maxLength='16' type="text" value={myName} onChange={e => setMyName(e.target.value)} />
+                                            <input maxLength={16} type="text" value={myName} onChange={e => setMyName(e.target.value)} />
                                         </form>
                                         :
                                         null
@@ -115,7 +139,7 @@ function Account({ itsMyAccount, modalActive, setModalActive, accountData, setMy
                                             </svg>
                                         </button>
                                         <label className={`account-settings ${editAbout && 'account-settings-open'}`}>
-                                            <textarea wrap='hard' value={myAbout} cols='30' rows="8" onChange={e => setMyAbout(e.target.value)} />
+                                            <textarea wrap='hard' value={myAbout} cols={30} rows={8} onChange={e => setMyAbout(e.target.value)} />
                                         </label>
                                     </div>
                                     :
@@ -131,9 +155,9 @@ function Account({ itsMyAccount, modalActive, setModalActive, accountData, setMy
                                         {
                                             subscribtion.map((item, index) => (
                                                 <motion.li key={item._id}
-                                                    initial={{x: -10, opacity: 0}}
-                                                    animate={{x: 0, opacity: 1}}
-                                                    transition={{delay: `0.${index}`}}
+                                                    initial={{ x: -10, opacity: 0 }}
+                                                    animate={{ x: 0, opacity: 1 }}
+                                                    transition={{ delay: Number(`0.${index}`) }}
                                                 >
                                                     <Link to={`/account/${item._id}`}>
                                                         <div>

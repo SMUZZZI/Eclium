@@ -3,15 +3,23 @@ import './main.css'
 import { motion } from 'framer-motion'
 import SongList from '../../components/SongList/SongList'
 import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
 import { audioGenre } from '../../../redux/slices/audioControl.slice'
 import useWindowDimensions from '../../../hooks/useWindowDimensions'
+import { useAppDispatch, useAppSelector } from '../../../redux/reduxHooks'
 
-function Main({ songRange, setSongRange, checkWidth }) {
-  const dispatch = useDispatch()
+interface IProps {
+  songRange: number
+  setSongRange: (v: number) => void
+  checkWidth: (e: React.MouseEvent<HTMLElement>, clickRef: React.RefObject<HTMLDivElement>) => void
+}
+
+function Main(props: IProps) {
+  const { songRange, setSongRange, checkWidth } = props
+
+  const dispatch = useAppDispatch()
   const title = 'Latest songs'
 
-  const { data } = useSelector(state => state.songId)
+  const { data } = useAppSelector(state => state.songId)
 
   const [downloadSong, setDownloadSong] = useState('')
 
@@ -38,7 +46,7 @@ function Main({ songRange, setSongRange, checkWidth }) {
 
   return (
     <section className='main'>
-      <SongList title={title} songRange={songRange} setSongRange={setSongRange} checkWidth={checkWidth} />
+      <SongList title={title} songRange={songRange} setSongRange={setSongRange} checkWidth={checkWidth} id={''} itsMyAccount={false} />
       {
         data != null ?
           <motion.aside style={{
@@ -63,7 +71,7 @@ function Main({ songRange, setSongRange, checkWidth }) {
               </div>
               <div className='main-aside-download'>
                 <div>
-                  <Link className='download-btn' target="_blank" download={downloadSong}>Download
+                  <Link className='download-btn' target="_blank" download={downloadSong} to='/'>Download
                     <svg width="14" height="15" viewBox="0 0 14 15" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M7 0V11.1648M7 11.1648L11.5 6.5M7 11.1648L2.5 6.5M0 14H14" stroke="white" stroke-width="2" />
                     </svg>
@@ -78,8 +86,8 @@ function Main({ songRange, setSongRange, checkWidth }) {
                       <motion.li
                         initial={{ opacity: 0, x: 10 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: `.${index + 2}` }}
-                      ><Link onClick={() => dispatch(audioGenre(item))}>{item}</Link></motion.li>
+                        transition={{ delay: Number(`.${index + 2}`) }}
+                      ><Link onClick={() => dispatch(audioGenre(item))} to={''}>{item}</Link></motion.li>
                     ))
                   }
                 </ul>

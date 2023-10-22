@@ -2,26 +2,25 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import Header from './App/Header/Header';
 import Main from './App/pages/Main/Main';
-import SubscribersAndSubscription from './App/pages/SubscribersAndSubscription/SubscribersAndSubscription';
 import AboutUs from './App/pages/AboutUs/AboutUs';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useRef, useState } from 'react';
+import { createRef, useEffect, useRef, useState } from 'react';
 import { audioNext } from './redux/slices/audioControl.slice';
 import MainPlayer from './App/MainPlayer/MainPlayer';
 import AccountUser from './App/pages/AccountUser/AccountUser';
 import AccountMy from './App/pages/AccountMy/AccountMy';
+import { useAppDispatch, useAppSelector } from './redux/reduxHooks';
 
 
 function App() {
-  const dispatch = useDispatch()
-  const { data } = useSelector(state => state.songId)
-  const isPlaying = useSelector(state => state.audioControl) && data != null
+  const dispatch = useAppDispatch()
+  const { data } = useAppSelector(state => state.songId)
+  const isPlaying = useAppSelector(state => state.audioControl) && data != null
 
-  const audioRef = useRef()
-  const [volumeRange, setVolumeRange] = useState(0.5)
+  const audioRef = createRef<HTMLAudioElement>()
+  const [volumeRange, setVolumeRange] = useState(0.1)
   const [songRange, setSongRange] = useState(0)
   useEffect(() => {
-    if (data != null) {
+    if (data != null && audioRef.current) {
       if (isPlaying)
         audioRef.current.play()
       else
@@ -30,23 +29,27 @@ function App() {
   }, [isPlaying])
 
   const onPlay = () => {
-    const duration = audioRef.current.duration
-    const currentTime = audioRef.current.currentTime
-    setSongRange(currentTime / duration * 100)
-    if (duration == currentTime) {
-      dispatch(audioNext(true))
+    if (audioRef.current) {
+      const duration = audioRef.current.duration
+      const currentTime = audioRef.current.currentTime
+      setSongRange(currentTime / duration * 100)
+      if (duration == currentTime) {
+        dispatch(audioNext(true))
+      }
     }
   }
 
-  const checkWidth = (e, clickRef) => {
-    let width = clickRef.current.clientWidth
-    const offset = e.nativeEvent.offsetX
+  const checkWidth = (e: React.MouseEvent<HTMLElement>, clickRef: React.RefObject<HTMLDivElement>) => {
+    if (clickRef.current && audioRef.current) {
+      let width = clickRef.current.clientWidth
+      const offset = e.nativeEvent.offsetX
 
-    const progress = offset / width * 100
-    audioRef.current.currentTime = progress / 100 * audioRef.current.duration
+      const progress = offset / width * 100
+      audioRef.current.currentTime = progress / 100 * audioRef.current.duration
+    }
   }
   useEffect(() => {
-    if (data != null) {
+    if (data != null && audioRef.current) {
       audioRef.current.volume = volumeRange
     }
   }, [volumeRange])
@@ -62,7 +65,6 @@ function App() {
         <Route path='/' element={<Main songRange={songRange} setSongRange={setSongRange} checkWidth={checkWidth} />} />
         <Route path='/account/:id' element={<AccountUser songRange={songRange} setSongRange={setSongRange} checkWidth={checkWidth} />} />
         <Route path='/account/my' element={<AccountMy songRange={songRange} setSongRange={setSongRange} checkWidth={checkWidth} />} />
-        <Route path='/:accountid/subscriptions' element={<SubscribersAndSubscription title={'subscriptions'} />} />
         <Route path='/about' element={<AboutUs />} />
       </Routes>
       <MainPlayer checkWidth={checkWidth} songRange={songRange} setSongRange={setSongRange} volumeRange={volumeRange} setVolumeRange={setVolumeRange} />

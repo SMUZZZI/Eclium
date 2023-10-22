@@ -1,12 +1,12 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { audioGenre } from '../../../redux/slices/audioControl.slice'
 import { motion } from 'framer-motion'
+import { useAppDispatch } from '../../../redux/reduxHooks'
 
 
 function Logo() {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     return (
         <motion.div

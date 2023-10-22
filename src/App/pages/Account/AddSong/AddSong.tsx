@@ -3,15 +3,25 @@ import './addsong.css'
 import { motion, AnimatePresence } from 'framer-motion'
 import axios from '../../../../actions/requests'
 import { fetchSongReload } from '../../../../redux/slices/song.slice'
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '../../../../redux/reduxHooks'
+import { IAccount } from '../../../../redux/slices/user.slice'
 
-function AddSong({ authorData, modalActive, setModalActive }) {
-    const dispatch = useDispatch()
+interface IProps {
+    authorData: IAccount
+    modalActive: boolean
+    setModalActive: (v: boolean) => void
+}
+
+function AddSong(props: IProps) {
+
+    const { authorData, modalActive, setModalActive } = props
+
+    const dispatch = useAppDispatch()
 
     const [audioURL, setAudioURL] = useState('')
     const [iconURL, setIconURL] = useState('')
     const [title, setTitle] = useState('')
-    const [genres, setGenres] = useState([])
+    const [genres, setGenres] = useState<string[]>([])
     const [warn, setWarn] = useState(false)
 
     const onSubmit = async () => {
@@ -26,8 +36,11 @@ function AddSong({ authorData, modalActive, setModalActive }) {
         await axios.put("/api/add/song", postValue)
         dispatch(fetchSongReload(true))
     }
-    const onAudioChange = async (event) => {
+    const onAudioChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         try {
+            if (!event.target.files) {
+                return;
+            }
             const formData = new FormData()
             const file = event.target.files[0]
             formData.append("file", file)
@@ -38,8 +51,11 @@ function AddSong({ authorData, modalActive, setModalActive }) {
             alert("Ошибка при загрузке файла")
         }
     }
-    const onIconChange = async (event) => {
+    const onIconChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         try {
+            if (!event.target.files) {
+                return;
+            }
             const formData = new FormData()
             const file = event.target.files[0]
             formData.append("file", file)
@@ -51,7 +67,7 @@ function AddSong({ authorData, modalActive, setModalActive }) {
         }
     }
 
-    const onGenreSet = (value) => {
+    const onGenreSet = (value: string) => {
         genres.includes(value) ?
             setGenres(genres.filter(item => item != value))
             :
@@ -81,7 +97,7 @@ function AddSong({ authorData, modalActive, setModalActive }) {
                                         null
                                 }
                                 <input type="file" id='file-input' accept='audio/*' onChange={onAudioChange} />
-                                <label for="file-input">Chose Song
+                                <label htmlFor="file-input">Chose Song
                                     <svg width="15" height="16" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M12.5 22V2M12.5 2L20.5357 11.6071M12.5 2L4.46429 11.6071M0 25H25" stroke="currentColor" stroke-width="2" />
                                     </svg>
@@ -95,7 +111,7 @@ function AddSong({ authorData, modalActive, setModalActive }) {
                                 <input type="text" placeholder='Title' value={title} className='title-input' onChange={e => setTitle(e.target.value)} />
 
                                 <input type="file" id='file-input-icon' accept='image/*' onChange={onIconChange} />
-                                <label for="file-input-icon">Chose Icon
+                                <label htmlFor="file-input-icon">Chose Icon
                                     <svg width="15" height="16" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M12.5 22V2M12.5 2L20.5357 11.6071M12.5 2L4.46429 11.6071M0 25H25" stroke="currentColor" stroke-width="2" />
                                     </svg>
@@ -117,7 +133,6 @@ function AddSong({ authorData, modalActive, setModalActive }) {
                                 if (audioURL.length != 0 && title.length != 0) {
                                     onSubmit()
                                     setModalActive(false)
-                                    // window.location.reload(false);
                                 }
                                 else {
                                     setWarn(true)

@@ -1,14 +1,24 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { createRef, useEffect, useState } from 'react'
 import './mainplayer.css'
-import { useDispatch, useSelector } from 'react-redux'
 import { audioNext, audioPlayPause, audioPrew } from '../../redux/slices/audioControl.slice'
 import useWindowDimensions from '../../hooks/useWindowDimensions'
+import { useAppDispatch, useAppSelector } from '../../redux/reduxHooks'
 
-function MainPlayer({ checkWidth, songRange, setSongRange, volumeRange, setVolumeRange }) {
-    const dispatch = useDispatch()
-    const clickRef = useRef()
-    const { data } = useSelector(state => state.songId)
-    const isPlaying = useSelector(state => state.audioControl)
+interface IProps {
+    checkWidth: (e: React.MouseEvent<HTMLElement>, clickRef: React.RefObject<HTMLDivElement>) => void
+    songRange: number
+    setSongRange: (v: number) => void
+    volumeRange: number
+    setVolumeRange: (v: number) => void
+}
+
+function MainPlayer(props: IProps) {
+    const { checkWidth, songRange, setSongRange, volumeRange, setVolumeRange } = props
+
+    const dispatch = useAppDispatch()
+    const clickRef = createRef<HTMLDivElement>()
+    const { data } = useAppSelector(state => state.songId)
+    const isPlaying = useAppSelector(state => state.audioControl)
 
     const onPlayHandler = () => {
         dispatch(audioPlayPause(!isPlaying))
@@ -51,7 +61,7 @@ function MainPlayer({ checkWidth, songRange, setSongRange, volumeRange, setVolum
                                 <div className='mainplayer-play-line-progress-bar' style={{
                                     width: `${songRange * playLineWidth}px`
                                 }} />
-                                <input type="range" value={songRange} onChange={e => setSongRange(e.target.value)} />
+                                <input type="range" value={songRange} onChange={e => setSongRange(Number(e.target.value))} />
                             </div>
                             <div className='mainplayer-controls'>
                                 <button className="prew" onClick={onPrewHandler}>
@@ -100,7 +110,7 @@ function MainPlayer({ checkWidth, songRange, setSongRange, volumeRange, setVolum
                                         <span></span>
                                         <span></span>
                                     </div>
-                                    <input type="range" step='0.01' min='0' max='1' value={volumeRange} onChange={e => setVolumeRange(e.target.value)} />
+                                    <input type="range" step='0.01' min='0' max='1' value={volumeRange} onChange={e => setVolumeRange(Number(e.target.value))} />
                                 </div>
                             </div>
                         </div>

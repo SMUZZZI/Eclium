@@ -2,17 +2,17 @@ import React, { useState } from 'react'
 import './headerlinks.css'
 import { motion } from 'framer-motion'
 import { Link, useLocation } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
 import { audioGenre } from '../../../redux/slices/audioControl.slice'
+import { useAppDispatch } from '../../../redux/reduxHooks'
 
 function HeaderLinks() {
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const [isGenresOpen, setIsGenresOpen] = useState(false)
     const _url = useLocation();
 
     const itsMyAccount = _url.pathname === "/account/my" ? true : false
 
-    const setGenre = (genre) => {
+    const setGenre = (genre: string) => {
         if (!itsMyAccount)
             dispatch(audioGenre(genre))
         setIsGenresOpen(false)

@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import Account from '../Account/Account'
-import { useDispatch } from 'react-redux'
-import { fetchAccountMe, fetchAccountMeEdit } from '../../../redux/slices/user.slice'
+import { IAccount, fetchAccountMe, fetchAccountMeEdit } from '../../../redux/slices/user.slice'
 import axios from '../../../actions/requests'
+import { useAppDispatch } from '../../../redux/reduxHooks'
 
-function AccountMy({ songRange, setSongRange, checkWidth }) {
-    const dispatch = useDispatch()
+interface IProps {
+    songRange: number
+    setSongRange: (v: number) => void
+    checkWidth: (e: React.MouseEvent<HTMLElement>, clickRef: React.RefObject<HTMLDivElement>) => void
+}
+
+function AccountMy(props: IProps) {
+    const { songRange, setSongRange, checkWidth } = props
+
+    const dispatch = useAppDispatch()
     const [modalActive, setModalActive] = useState(false)
-    const [accountData, setData] = useState(null)
+    const [accountData, setData] = useState<IAccount | null>(null)
     const [editAbout, setEditAbout] = useState(false)
 
     const getMyAccount = async () => {
@@ -29,8 +37,11 @@ function AccountMy({ songRange, setSongRange, checkWidth }) {
     const [myName, setMyName] = useState(''.slice(0, 16))
     const [iconURL, setIconURL] = useState(accountData?.icon)
 
-    const onIconChange = async (event) => {
+    const onIconChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
         try {
+            if (!event.target.files) {
+                return;
+            }
             const formData = new FormData()
             const file = event.target.files[0]
             formData.append("file", file)
@@ -45,7 +56,7 @@ function AccountMy({ songRange, setSongRange, checkWidth }) {
     useEffect(() => {
         getMyAccount()
     }, [])
-    
+
     useEffect(() => {
         if (accountData != null) {
             setMyName(`${accountData.name}`)
@@ -57,9 +68,13 @@ function AccountMy({ songRange, setSongRange, checkWidth }) {
 
     return (
         accountData != null ?
-        <Account itsMyAccount={true} modalActive={modalActive} setModalActive={setModalActive} accountData={accountData} setMyName={setMyName} myName={myName} editMyAccount={editMyAccount} setEditAbout={setEditAbout} editAbout={editAbout} setMyAbout={setMyAbout} myAbout={myAbout} onIconChange={onIconChange} songRange={songRange} setSongRange={setSongRange} checkWidth={checkWidth}/>
-        :
-        null
+            <Account itsMyAccount={true} modalActive={modalActive} setModalActive={setModalActive} accountData={accountData} setMyName={setMyName} myName={myName} editMyAccount={editMyAccount} setEditAbout={setEditAbout} editAbout={editAbout} setMyAbout={setMyAbout} myAbout={myAbout} onIconChange={onIconChange} songRange={songRange} setSongRange={setSongRange} checkWidth={checkWidth} isSub={false} unsubscribeAccount={function (): void {
+                throw new Error('Function not implemented.')
+            } } subscribeAccount={function (): void {
+                throw new Error('Function not implemented.')
+            } } />
+            :
+            null
     )
 }
 
